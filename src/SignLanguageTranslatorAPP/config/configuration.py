@@ -14,7 +14,7 @@ class ConfigurationManager:
 
     
     def get_emergency_model_config(self) -> EmergencyModelConfig:
-        config = self.config.data_ingestion
+        config = self.config.emergancy_model
 
         create_directories([config.root_dir])
 
@@ -26,7 +26,7 @@ class ConfigurationManager:
         return emergency_model_config
     
     def get_include_model_config(self) -> IncludeModelConfig:
-        config = self.config.data_ingestion
+        config = self.config.Include_model
 
         create_directories([config.root_dir])
 
@@ -38,7 +38,7 @@ class ConfigurationManager:
         return include_model_config
     
     def get_wlasl_model_config(self) -> EmergencyModelConfig:
-        config = self.config.data_ingestion
+        config = self.config.WLASL_model
 
         create_directories([config.root_dir])
 
@@ -48,3 +48,26 @@ class ConfigurationManager:
         )
 
         return wlasl_model_config
+    
+
+    class ConfigurationManager1:
+        def __init__(
+            self,
+            config_filepath = CONFIG_FILE_PATH):
+
+            self.config = read_yaml(config_filepath)
+
+            create_directories([self.config.artifacts_root])
+
+
+        def get_preprocessing_config(self) -> PreprocessingConfig:
+            config = self.config.preprocessing
+
+            create_directories([config.root_dir])
+
+            preprocessing_config = PreprocessingConfig(
+                root_dir=config.root_dir,
+                
+            )
+
+            return preprocessing_config

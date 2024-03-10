@@ -8,3 +8,8 @@ Include_model:
 
 WLASL_model:
   root_dir: model/model_wlasl.hdf5
+
+artifacts_root: artifacts
+
+preprocessing:
+  root_dir: artifacts/include
