@@ -1,0 +1,10 @@
+model_root: model
+
+emergancy_model:
+  root_dir: model/model_emergency.hdf5
+
+Include_model:
+  root_dir: model/model_include.hdf5
+
+WLASL_model:
+  root_dir: model/model_wlasl.hdf5
