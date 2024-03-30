@@ -1,0 +1,12 @@
+artifacts_root: model 1/artifacts
+
+preprocessing:
+  root_dir: model 1/artifacts/preprocessing
+
+landmarks_extraction:
+  root_dir: model 1/artifacts/landmarks
+  output_dir: model 1/artifacts/landmarks
+
+model:
+  root_dir: model 1/artifacts/model
+  model_weight_dir: model 1/artifacts/model/model_weight.h5
