@@ -1,6 +1,6 @@
-tensorflow==2.15.0
-torch==2.1.2
-mediapipe==0.10.9
+tensorflow==2.16.1
+torch==2.2.2
+mediapipe==0.10.11
 opencv-python-headless
 pandas
 numpy
