@@ -1,0 +1,24 @@
+stages:
+  prepare_base_model:
+    cmd: python src/SignLanguageTranslatorAPP/pipeline/pradiction_pipeline.py
+    deps:
+      - src/SignLanguageTranslatorAPP/pipeline/pradiction_pipeline.py
+      - config/config.yaml
+      - model/model_weight.hdf5
+    params:
+      - ROWS_PER_FRAME
+      - FIXED_FRAMES
+      - UNITS
+      - NUM_BLOCKS
+      - MLP_RATIO
+      - EMBEDDING_DROPOUT
+      - MLP_DROPOUT_RATIO
+      - CLASSIFIER_DROPOUT_RATIO
+      - batch_size
+      - N_EPOCHS
+      - LR_MAX
+      - N_WARMUP_EPOCHS
+      - WD_RATIO
+      - NUM_CLASSES
+    outs:
+      - artifacts/landmarks

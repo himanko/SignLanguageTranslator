@@ -1,3 +1,4 @@
+import os
 from SignLanguageTranslatorAPP.constants import *
 from SignLanguageTranslatorAPP.utils.common import read_yaml, create_directories
 from SignLanguageTranslatorAPP.entity.config_entity import (LandmarksExtractionConfig,
@@ -22,7 +23,11 @@ class ConfigurationManager:
         create_directories([config.root_dir])
 
         preprocessing_config = PreprocessingConfig(
-            root_dir=config.root_dir
+            root_dir=Path(config.root_dir),
+            params_FIXED_FRAMES=self.params.FIXED_FRAMES,
+            params_ROWS_PER_FRAME=self.params.ROWS_PER_FRAME,
+            params_UNITS=self.params.UNITS
+
             
         )
 
@@ -48,7 +53,15 @@ class ConfigurationManager:
 
         model_config = ModelConfig(
             root_dir=config.root_dir,
-            model_weight_dir=config.model_weight_dir
+            model_weight_dir=config.model_weight_dir,
+            params_CLASSIFIER_DROPOUT_RATIO=self.params.CLASSIFIER_DROPOUT_RATIO,
+            params_EMBEDDING_DROPOUT=self.params.EMBEDDING_DROPOUT,
+            params_MLP_DROPOUT_RATIO=self.params.MLP_DROPOUT_RATIO,
+            params_MLP_RATIO=self.params.MLP_RATIO,
+            params_N_EPOCHS=self.params.N_EPOCHS,
+            params_NUM_BLOCKS=self.params.NUM_BLOCKS,
+            params_UNITS=self.params.UNITS,
+        
             
             
         )

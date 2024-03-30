@@ -40,6 +40,27 @@ class load_process_predict:
             data = [] 
             fy = height/width
 
+            if result.face_landmarks is None:
+                for i in range(468): #
+                    data.append({
+                        'type' : 'face',
+                        'landmark_index' : i,
+                        'x' : np.nan,
+                        'y' : np.nan,
+                        'z' : np.nan,
+                    })
+            else:
+                assert(len(result.face_landmarks.landmark)==468)
+                for i in range(468): #
+                    xyz = result.face_landmarks.landmark[i]
+                    data.append({
+                        'type' : 'face',
+                        'landmark_index' : i,
+                        'x' : xyz.x,
+                        'y' : xyz.y *fy,
+                        'z' : xyz.z,
+                    })
+
             # -----------------------------------------------------
             if result.left_hand_landmarks is None:
                 for i in range(21):  #
@@ -56,6 +77,27 @@ class load_process_predict:
                     xyz = result.left_hand_landmarks.landmark[i]
                     data.append({
                         'type': 'left_hand',
+                        'landmark_index': i,
+                        'x': xyz.x,
+                        'y': xyz.y *fy,
+                        'z': xyz.z,
+                    })
+
+            if result.pose_landmarks is None:
+                for i in range(33):  #
+                    data.append({
+                        'type': 'pose',
+                        'landmark_index': i,
+                        'x': np.nan,
+                        'y': np.nan,
+                        'z': np.nan,
+                    })
+            else:
+                assert (len(result.pose_landmarks.landmark) == 33)
+                for i in range(33):  #
+                    xyz = result.pose_landmarks.landmark[i]
+                    data.append({
+                        'type': 'pose',
                         'landmark_index': i,
                         'x': xyz.x,
                         'y': xyz.y *fy,

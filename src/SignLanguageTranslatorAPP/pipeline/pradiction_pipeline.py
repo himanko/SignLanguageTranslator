@@ -2,7 +2,7 @@ import os
 import torch
 import numpy as np
 import pandas as pd
-from mapping import signs
+# from mapping import signs
 from SignLanguageTranslatorAPP.components.preprocessing import *
 from SignLanguageTranslatorAPP.config.configuration import ConfigurationManager
 from SignLanguageTranslatorAPP.components.landmarks_extraction import load_process_predict
@@ -23,7 +23,7 @@ class PradictionPipeline:
             # Get Base Model configuratio
             landmarks_extraction_config = config.get_landmarks_extraction_config()
             # Get Base Model configuratio
-            base_model_config = config.get_base_model_config()
+            base_model_config = config.get_model_config()
             
             
             # Initialize LandmarksExtraction with the configuration
@@ -36,12 +36,21 @@ class PradictionPipeline:
             prepare_base_model.get_base_model
             model = prepare_base_model.apply
 
+            
+            video_path = f'artifacts/MVI_9588.MOV'
+            
+            prediction = load_process_predict(video_path)
+            # Process the video file (implement your logic here)
+            if prediction:
+                return {'message': 'Video uploaded and processed successfully.', "pred": prediction}
+    
+
             # Load a single file for visualizing
-            df = pd.read_parquet(f'model 1/artifacts/landmarks/{id}.parquet')
+            df = pd.read_parquet(f'artifacts/landmarks/{id}.parquet')
             df.sample(10)
             # Load parquet file and convert it to required shape
             
-            x_in = torch.tensor(load_relevant_data_subset(f'model 1/artifacts/landmarks/{id}.parquet'))
+            x_in = torch.tensor(load_relevant_data_subset(f'artifacts/landmarks/{id}.parquet'))
             feature_preprocess = FeaturePreprocess()
             print(feature_preprocess(x_in).shape, x_in[0])
 
@@ -54,7 +63,7 @@ class PradictionPipeline:
 
             ind=np.argmax(preds)
 
-            return signs[ind]
+            return ind
 
         except Exception as e:
             logger.exception(f"Error in BaseModelPipeline: {e}")

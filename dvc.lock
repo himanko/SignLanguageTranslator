@@ -1,0 +1,39 @@
+schema: '2.0'
+stages:
+  prepare_base_model:
+    cmd: python src/SignLanguageTranslatorAPP/pipeline/pradiction_pipeline.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: ed84d5040bdf45bb5f9a085bc5ecd0db
+      size: 249
+    - path: model/model_weight.hdf5
+      hash: md5
+      md5: f457335ef25eedbcc55426d5ef83ec58
+      size: 9854552
+    - path: src/SignLanguageTranslatorAPP/pipeline/pradiction_pipeline.py
+      hash: md5
+      md5: 6da43002387e5ce688568f6e9a18bc8f
+      size: 2950
+    params:
+      params.yaml:
+        CLASSIFIER_DROPOUT_RATIO: 0.1
+        EMBEDDING_DROPOUT: 0.0
+        FIXED_FRAMES: 104
+        LR_MAX: 0.0001
+        MLP_DROPOUT_RATIO: 0.3
+        MLP_RATIO: 2
+        NUM_BLOCKS: 4
+        NUM_CLASSES: 250
+        N_EPOCHS: 200
+        N_WARMUP_EPOCHS: 0
+        ROWS_PER_FRAME: 534
+        UNITS: 256
+        WD_RATIO: 0.05
+        batch_size: 32
+    outs:
+    - path: artifacts/landmarks
+      hash: md5
+      md5: d751713988987e9331980363e24189ce.dir
+      size: 0
+      nfiles: 0
